@@ -12,7 +12,6 @@ import Foundation
  Initialize instances of each creature struct with different values for their properties.
  */
 
-
 struct Creature {
     let name: String
     let description: String
@@ -52,7 +51,7 @@ let cerberus = Creature(
  
  Write a function called fibonacciAbility that takes in an Int parameter n and returns the nth number in the Fibonacci sequence.
  Add a computed property called ability to the Creature struct that incorporates the fibonacciAbility function and describes the creature’s special ability based on its magicPower.
- */
+*/
 
 extension Creature {
     var ability: String {
@@ -81,7 +80,7 @@ extension Creature {
  
  Create an array called creatureCatalog that holds all the creature instances.
  Write a function called describeCreature that takes the creature array as a parameter and prints out a description of each creature in the creature, including their special abilities from Part 2.
- */
+*/
 
 extension Creature {
     var bio: String {
@@ -122,7 +121,6 @@ extension Creature {
         
     }
 }
-
 
 func describeCreatureWithInteractions(for creatures: [Creature]) {
     
