@@ -47,3 +47,37 @@ let cerberus = Creature(
     isGood: false,
     magicPower: 9
 )
+
+/*: # Part 2: Fibonacci Creature Abilities
+ 
+ Write a function called fibonacciAbility that takes in an Int parameter n and returns the nth number in the Fibonacci sequence.
+ Add a computed property called ability to the Creature struct that incorporates the fibonacciAbility function and describes the creature’s special ability based on its magicPower.
+*/
+
+extension Creature {
+    var ability: String {
+        "\(name) has a magic ability of \(fibonacciAbility(for: magicPower))"
+    }
+    
+    private func fibonacciAbility(for n: Int) -> Int {
+        guard n > 0 else { return 0 }
+        
+        var numbers: [Int] = []
+        
+        for num in 0...n {
+            if num == 0 || num == 1 {
+                numbers.append(num)
+            } else {
+                let newNumber = numbers[num-1] + numbers[num-2]
+                numbers.append(newNumber)
+            }
+        }
+        
+        return numbers[n]
+    }
+}
+
+print(griffin.ability) // Expected ability of 8
+print(pegasus.ability) // Expected ability of 55
+print(chimera.ability) // Expected ability of 21
+print(cerberus.ability) // Expected ability of 34
