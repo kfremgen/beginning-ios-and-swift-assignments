@@ -56,7 +56,7 @@ let cerberus = Creature(
 
 extension Creature {
     var ability: String {
-        "\(name) has a magic ability of \(fibonacciAbility(for: magicPower))"
+        "This creature has a magic ability of \(fibonacciAbility(for: magicPower))."
     }
     
     private func fibonacciAbility(for n: Int) -> Int {
@@ -77,7 +77,20 @@ extension Creature {
     }
 }
 
-print(griffin.ability) // Expected ability of 8
-print(pegasus.ability) // Expected ability of 55
-print(chimera.ability) // Expected ability of 21
-print(cerberus.ability) // Expected ability of 34
+/*: #Part 3: The Mythical Creature
+ 
+ Create an array called creatureCatalog that holds all the creature instances.
+ Write a function called describeCreature that takes the creature array as a parameter and prints out a description of each creature in the creature, including their special abilities from Part 2.
+*/
+
+var creatureCatalog = [griffin,pegasus,chimera,cerberus]
+
+func describeCreature(for creatures: [Creature]) {
+    for creature in creatures {
+        print("==== \(creature.name) ===")
+        print("\(creature.description)")
+        print("\(creature.ability)")
+    }
+}
+
+describeCreature(for: creatureCatalog)
