@@ -4,13 +4,13 @@ import Foundation
  
  Define a Creature struct with the following properties:
  - name (String)
--  description (String)
+ -  description (String)
  - isGood (Bool)
  - magicPower (Int)
  
  Create at least three different creature structs that conform to the Creature struct (e.g., Unicorn, Dragon, Phoenix).
  Initialize instances of each creature struct with different values for their properties.
-*/
+ */
 
 
 struct Creature {
@@ -52,7 +52,7 @@ let cerberus = Creature(
  
  Write a function called fibonacciAbility that takes in an Int parameter n and returns the nth number in the Fibonacci sequence.
  Add a computed property called ability to the Creature struct that incorporates the fibonacciAbility function and describes the creature’s special ability based on its magicPower.
-*/
+ */
 
 extension Creature {
     var ability: String {
@@ -81,16 +81,62 @@ extension Creature {
  
  Create an array called creatureCatalog that holds all the creature instances.
  Write a function called describeCreature that takes the creature array as a parameter and prints out a description of each creature in the creature, including their special abilities from Part 2.
-*/
+ */
+
+extension Creature {
+    var bio: String {
+        """
+        ==== \(name) ===
+        \(description)
+        \(ability)
+        Status: \(isGood ? "Good" : "Evil")
+        """
+    }
+}
 
 var creatureCatalog = [griffin,pegasus,chimera,cerberus]
 
 func describeCreature(for creatures: [Creature]) {
     for creature in creatures {
-        print("==== \(creature.name) ===")
-        print("\(creature.description)")
-        print("\(creature.ability)")
+        print(creature.bio)
     }
 }
 
 describeCreature(for: creatureCatalog)
+
+/*: # Part 4: Mythical Creature Interactions
+ 
+ Add a function called interactWith to the Creature struct that takes another Creature instance as a parameter.
+ Inside the interactWith function, use a switch statement to check the isGood property of both creatures and perform a different action based on their alignments (good vs. evil).
+ Update the describeCreature function to call the interactWith function for each pair of creatures in the creature, and print out the result of their interaction.
+*/
+
+extension Creature {
+    func interactWith(_ other: Creature) -> String {
+        switch (self.isGood,other.isGood) {
+        case (true,true), (false,false):
+            "\(self.name) and \(other.name) are friends!"
+        case (true,false), (false,true):
+            "\(self.name) and \(other.name) are enemies!"
+        }
+        
+    }
+}
+
+
+func describeCreatureWithInteractions(for creatures: [Creature]) {
+    
+    for creature in creatures {
+        print(creature.bio)
+        if let randomCreature = randomCreature(from: creatures, notIncluding: creature) {
+            print("\(creature.interactWith(randomCreature))")
+        }
+    }
+    
+    func randomCreature(from creatures: [Creature], notIncluding creature: Creature) -> Creature? {
+        var filteredCreatures = creatures.filter { $0.name != creature.name }
+        return filteredCreatures.randomElement()
+    }
+}
+
+describeCreatureWithInteractions(for: creatureCatalog)
