@@ -112,10 +112,10 @@ describeCreature(for: creatureCatalog)
 
 extension Creature {
     func interactWith(_ other: Creature) -> String {
-        switch (self.isGood,other.isGood) {
-        case (true,true), (false,false):
+        switch self.isGood == other.isGood {
+        case true:
             "\(self.name) and \(other.name) are friends!"
-        case (true,false), (false,true):
+        case false:
             "\(self.name) and \(other.name) are enemies!"
         }
         
@@ -132,7 +132,7 @@ func describeCreatureWithInteractions(for creatures: [Creature]) {
     }
     
     func randomCreature(from creatures: [Creature], notIncluding creature: Creature) -> Creature? {
-        var filteredCreatures = creatures.filter { $0.name != creature.name }
+        let filteredCreatures = creatures.filter { currentCreature in currentCreature.name != creature.name }
         return filteredCreatures.randomElement()
     }
 }
